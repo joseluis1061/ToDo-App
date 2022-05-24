@@ -1,11 +1,30 @@
 import React from 'react'
+import { useState } from 'react'
 
+export const Search = ({listaTareas, serchTareas,setSerchTareas}) => {
+  
+  const [datoBuscado, setDatoBuscado] = useState('')
 
-export const Search = (props) => {
+ 
+  function busqueda(e){
+    e.preventDefault();
+    setDatoBuscado(e.target.value)
+    
+    if(datoBuscado===''){    
+      setSerchTareas([...listaTareas]);
+    }
+    const datoFiltrado = listaTareas.filter((valor)=>{
+      return valor.includes(datoBuscado);
+    })
+    setSerchTareas(datoFiltrado);
+    // setDatoBuscado('');    
+  }
+  
   return (
-    <div>
-        <input type="text" id='search'/>
-        <label htmlFor="search">Search</label>
-    </div>
+
+    <input type="text" id='search'
+          value = {datoBuscado}
+          onChange={busqueda}
+        />    
   )
 }
