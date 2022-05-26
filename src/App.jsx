@@ -33,15 +33,32 @@ function App() {
     const newLista = listaTareas.filter((tarea)=>{
       let busqueda = serchText.toUpperCase();
       let textoLista = tarea.text.toUpperCase();
-      console.log(`Logica es: ${textoLista === busqueda}`)
-      console.log(`busqueda es: ${busqueda}`)
-      console.log(`textoLista es: ${textoLista}`)
       return textoLista.includes(busqueda);
     });
     lista = newLista;
-    console.log("Tamaño lista es "+lista.length)
   }
 
+  //Marcar tarea terminada
+  const onComplete=(id)=>{
+    const indexComplete = listaTareas.findIndex((tarea)=>{
+      return tarea.id === id;
+    });
+    console.log("indexComplete "+indexComplete)
+    const newList = [...listaTareas]
+    newList[indexComplete].complete = !newList[indexComplete].complete;
+    setListaTareas(newList)
+  };
+
+  //Marcar tarea terminada
+  const onRemove=(id)=>{
+    const indexRemove = listaTareas.findIndex((tarea)=>{
+      return tarea.id === id;
+    });
+    console.log("indexComplete "+indexRemove)
+    const newList = [...listaTareas]
+    newList.splice(indexRemove, 1);
+    setListaTareas(newList)
+  };
 
   return (
     <div className="App">
@@ -61,8 +78,9 @@ function App() {
         setListaTareas = {setListaTareas}
       />
       <TodoList
-        listaTareas = {listaTareas}
         lista = {lista}
+        onRemove = {onRemove}
+        onComplete = {onComplete}        
       />
 
     </div>

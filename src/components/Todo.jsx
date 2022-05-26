@@ -1,21 +1,20 @@
 import React from 'react'
 
-export const Todo = ({text, id, completed}) => {
-    const terminada = (text)=>{
-        console.log('terminada '+text);
-    }
-    const borrar = (text)=>{
-        console.log('borrar '+text);
-    }
+export const Todo = ({text, id, complete, onRemove, onComplete}) => {
+
   return (
     <div>
         <p>
         <span
-            onClick={()=>terminada(text)}
+            onClick={()=>onComplete(id)}
         >OK</span> 
-        {text} 
+        <span 
+        className={complete? 'completed':'no_completed'}
+        >
+          {text} 
+        </span>        
         <span
-            onClick={()=>borrar(text)}
+            onClick={()=>onRemove(id)}
         >X</span>
         </p>
     </div>
