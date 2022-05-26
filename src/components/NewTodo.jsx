@@ -2,18 +2,27 @@ import React from 'react'
 
 import { useState } from 'react'
 export const NewTodo = ({listaTareas, setListaTareas}) => {
-    const[nuevaTarea, setNuevaTarea] = useState('');
+    const[tareaTexto, setTareaTexto] = useState('');
+
+    const idRandom = ()=>{
+        const dateNow = Date.now().toString(36);
+        const numberRandom = Math.random().toString(36).substring(2);
+        return dateNow+numberRandom;
+    }
 
 
     const addTarea=(e)=>{
         e.preventDefault();
-        if(nuevaTarea === ''){
-            console.log('Vacia'+nuevaTarea)
+        if(tareaTexto === ''){
+            console.log('Vacia'+nuevaTarea);
             return;
         }       
-        console.log('Obtenida '+nuevaTarea)
+        const nuevaTarea = {
+            text:tareaTexto, complete:false, id:idRandom()
+        }
+        console.log('Nueva tarea Obtenida '+nuevaTarea)
         setListaTareas([...listaTareas, nuevaTarea]);
-        setNuevaTarea('');
+        setTareaTexto('');
     }
 
   return (
@@ -22,9 +31,9 @@ export const NewTodo = ({listaTareas, setListaTareas}) => {
         <form onSubmit={addTarea}>
             <input 
             type="text" 
-            value={nuevaTarea}
+            value={tareaTexto}
             onChange={(e)=>{
-                setNuevaTarea(e.target.value);
+                setTareaTexto(e.target.value);
             }}       
             />
 

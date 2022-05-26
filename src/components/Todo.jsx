@@ -1,21 +1,21 @@
 import React from 'react'
 
-export const Todo = ({tarea}) => {
-    const terminada = (tarea)=>{
-        console.log('terminada '+tarea);
+export const Todo = ({text, id, completed}) => {
+    const terminada = (text)=>{
+        console.log('terminada '+text);
     }
-    const borrar = (tarea)=>{
-        console.log('borrar '+tarea);
+    const borrar = (text)=>{
+        console.log('borrar '+text);
     }
   return (
     <div>
         <p>
         <span
-            onClick={()=>terminada(tarea)}
+            onClick={()=>terminada(text)}
         >OK</span> 
-        {tarea} 
+        {text} 
         <span
-            onClick={()=>borrar(tarea)}
+            onClick={()=>borrar(text)}
         >X</span>
         </p>
     </div>
